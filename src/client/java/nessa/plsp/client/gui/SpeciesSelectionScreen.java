@@ -57,6 +57,10 @@ public class SpeciesSelectionScreen extends Screen {
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         super.extractRenderState(graphics, mouseX, mouseY, delta);
+    }
+
+    @Override
+    public void extractMenuBackground(GuiGraphicsExtractor graphics) {
         // dim the background slightly
         graphics.fill(0, 0, this.width, this.height, 0x88000000);
 
