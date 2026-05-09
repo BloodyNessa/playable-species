@@ -2,8 +2,6 @@ package nessa.plsp.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import nessa.plsp.client.gui.SpeciesSelectionScreen;
 
 /**
@@ -19,19 +17,17 @@ public class PlayableSpeciesClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client == null) return;
 
-            ClientPlayerEntity player = client.player;
-            if (player == null) {
+            if (client.player == null) {
                 // no player in world
                 lastPlayerEntityId = -1;
                 return;
             }
 
-            int id = player.getEntityId();
+            int id = client.player.getId();
             if (id != lastPlayerEntityId) {
                 // A new client player instance appeared (first join or respawn) -> open GUI
                 lastPlayerEntityId = id;
-                final MinecraftClient mc = client;
-                mc.execute(() -> mc.setScreen(new SpeciesSelectionScreen()));
+                client.setScreenAndShow(new SpeciesSelectionScreen());
             }
         });
     }
