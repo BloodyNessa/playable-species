@@ -64,21 +64,18 @@ public class SpeciesSelectionScreen extends Screen {
         // dim the background slightly
         graphics.fill(0, 0, this.width, this.height, 0x88000000);
 
-        // panel
-        int panelW = 220;
-        int panelH = 120;
+        // panel (larger)
+        int panelW = 320;
+        int panelH = 180;
         int left = (this.width - panelW) / 2;
         int top = (this.height - panelH) / 2;
-        // panel background (grey)
-        graphics.fill(left, top, left + panelW, top + panelH, 0xFF2F2F2F);
-        // panel border
-        graphics.outline(left, top, panelW, panelH, 0xFF909090);
+
+        // draw standard menu background (includes rounded corners)
+        this.extractMenuBackground(graphics, left, top, panelW, panelH);
 
         // headline centered inside panel
-        String headline = PAGES.get(pageIndex).getString();
-        int hx = left + (panelW - this.font.width(headline)) / 2;
-        int hy = top + 12;
-        graphics.text(this.font, headline, hx, hy, 0xFFFFFFFF, true);
+        int hy = top + 14;
+        graphics.centeredText(this.font, PAGES.get(pageIndex), left + panelW / 2, hy, 0xFFFFFFFF);
     }
 
     @Override
